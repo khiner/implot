@@ -5227,7 +5227,7 @@ void ShowAxisMetrics(const ImPlotPlot& plot, const ImPlotAxis& axis) {
     }
 }
 
-void ShowMetricsWindow(bool* p_popen) {
+void ShowMetricsWindow() {
 
     static bool show_plot_rects = false;
     static bool show_axes_rects = false;
@@ -5243,7 +5243,7 @@ void ShowMetricsWindow(bool* p_popen) {
     ImPlotContext& gp = *GImPlot;
     // ImGuiContext& g = *GImGui;
     ImGuiIO& io = ImGui::GetIO();
-    ImGui::Begin("ImPlot Metrics", p_popen);
+
     ImGui::Text("ImPlot " IMPLOT_VERSION);
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
     ImGui::Text("Mouse Position: [%.0f,%.0f]", io.MousePos.x, io.MousePos.y);
@@ -5434,7 +5434,6 @@ void ShowMetricsWindow(bool* p_popen) {
         }
         ImGui::TreePop();
     }
-    ImGui::End();
 }
 
 bool ShowDatePicker(const char* id, int* level, ImPlotTime* t, const ImPlotTime* t1, const ImPlotTime* t2) {

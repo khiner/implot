@@ -187,8 +187,6 @@ struct HugeTimeData {
 void Demo_Help() {
     ImGui::Text("ABOUT THIS DEMO:");
     ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
-    ImGui::BulletText("The \"Tools\" menu above gives access to: Style Editors (ImPlot/ImGui)\n"
-                        "and Metrics (general purpose Dear ImGui debugging tool).");
     ImGui::Separator();
     ImGui::Text("PROGRAMMER GUIDE:");
     ImGui::BulletText("See the ShowDemoWindow() code in implot_demo.cpp. <- you are here!");
@@ -2168,49 +2166,7 @@ void DemoHeader(const char* label, void(*demo)()) {
     }
 }
 
-void ShowDemoWindow(bool* p_open) {
-    static bool show_implot_metrics      = false;
-    static bool show_implot_style_editor = false;
-    static bool show_imgui_metrics       = false;
-    static bool show_imgui_style_editor  = false;
-    static bool show_imgui_demo          = false;
-
-    if (show_implot_metrics) {
-        ImPlot::ShowMetricsWindow(&show_implot_metrics);
-    }
-    if (show_implot_style_editor) {
-        ImGui::SetNextWindowSize(ImVec2(415,762), ImGuiCond_Appearing);
-        ImGui::Begin("Style Editor (ImPlot)", &show_implot_style_editor);
-        ImPlot::ShowStyleEditor();
-        ImGui::End();
-    }
-    if (show_imgui_style_editor) {
-        ImGui::Begin("Style Editor (ImGui)", &show_imgui_style_editor);
-        ImGui::ShowStyleEditor();
-        ImGui::End();
-    }
-    if (show_imgui_metrics) {
-        ImGui::ShowMetricsWindow(&show_imgui_metrics);
-    }
-    if (show_imgui_demo) {
-        ImGui::ShowDemoWindow(&show_imgui_demo);
-    }
-    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(600, 750), ImGuiCond_FirstUseEver);
-    ImGui::Begin("ImPlot Demo", p_open, ImGuiWindowFlags_MenuBar);
-    if (ImGui::BeginMenuBar()) {
-        if (ImGui::BeginMenu("Tools")) {
-            ImGui::MenuItem("Metrics",      nullptr, &show_implot_metrics);
-            ImGui::MenuItem("Style Editor", nullptr, &show_implot_style_editor);
-            ImGui::Separator();
-            ImGui::MenuItem("ImGui Metrics",       nullptr, &show_imgui_metrics);
-            ImGui::MenuItem("ImGui Style Editor",  nullptr, &show_imgui_style_editor);
-            ImGui::MenuItem("ImGui Demo",          nullptr, &show_imgui_demo);
-            ImGui::EndMenu();
-        }
-        ImGui::EndMenuBar();
-    }
-    //-------------------------------------------------------------------------
+void ShowDemoWindow() {
     ImGui::Text("ImPlot says hello. (%s)", IMPLOT_VERSION);
     // display warning about 16-bit indices
     static bool showWarning = sizeof(ImDrawIdx)*8 == 16 && (ImGui::GetIO().BackendFlags & ImGuiBackendFlags_RendererHasVtxOffset) == false;
@@ -2297,7 +2253,6 @@ void ShowDemoWindow(bool* p_open) {
         }
         ImGui::EndTabBar();
     }
-    ImGui::End();
 }
 
 } // namespace ImPlot

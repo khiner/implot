@@ -1236,15 +1236,15 @@ IMPLOT_API bool ShowInputMapSelector(const char* label);
 IMPLOT_API void ShowStyleEditor(ImPlotStyle* ref = nullptr);
 // Add basic help/info block for end users (not a window).
 IMPLOT_API void ShowUserGuide();
-// Shows ImPlot metrics/debug information window.
-IMPLOT_API void ShowMetricsWindow(bool* p_popen = nullptr);
+// Shows ImPlot metrics/debug information.
+IMPLOT_API void ShowMetricsWindow();
 
 //-----------------------------------------------------------------------------
 // [SECTION] Demo
 //-----------------------------------------------------------------------------
 
-// Shows the ImPlot demo window (add implot_demo.cpp to your sources!)
-IMPLOT_API void ShowDemoWindow(bool* p_open = nullptr);
+// Shows the ImPlot demo (add implot_demo.cpp to your sources!)
+IMPLOT_API void ShowDemoWindow();
 
 }  // namespace ImPlot
 
