@@ -4881,12 +4881,13 @@ bool ShowStyleSelector(const char* label)
     static int style_idx = -1;
     if (ImGui::Combo(label, &style_idx, "Auto\0Classic\0Dark\0Light\0"))
     {
+        ImPlotStyle *dst = &GetStyle();
         switch (style_idx)
         {
-        case 0: StyleColorsAuto(); break;
-        case 1: StyleColorsClassic(); break;
-        case 2: StyleColorsDark(); break;
-        case 3: StyleColorsLight(); break;
+        case 0: StyleColorsAuto(dst); break;
+        case 1: StyleColorsClassic(dst); break;
+        case 2: StyleColorsDark(dst); break;
+        case 3: StyleColorsLight(dst); break;
         }
         return true;
     }
@@ -5744,12 +5745,7 @@ bool ShowTimePicker(const char* id, ImPlotTime* t) {
     return changed;
 }
 
-void StyleColorsAuto(ImPlotStyle* dst) {
-    ImPlotStyle* style              = dst ? dst : &ImPlot::GetStyle();
-    ImVec4* colors                  = style->Colors;
-
-    style->MinorAlpha               = 0.25f;
-
+void StyleColorsAuto(ImVec4* colors) {
     colors[ImPlotCol_Line]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_Fill]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_MarkerOutline] = IMPLOT_AUTO_COL;
@@ -5774,12 +5770,7 @@ void StyleColorsAuto(ImPlotStyle* dst) {
     colors[ImPlotCol_Crosshairs]    = IMPLOT_AUTO_COL;
 }
 
-void StyleColorsClassic(ImPlotStyle* dst) {
-    ImPlotStyle* style              = dst ? dst : &ImPlot::GetStyle();
-    ImVec4* colors                  = style->Colors;
-
-    style->MinorAlpha               = 0.5f;
-
+void StyleColorsClassic(ImVec4* colors) {
     colors[ImPlotCol_Line]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_Fill]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_MarkerOutline] = IMPLOT_AUTO_COL;
@@ -5803,12 +5794,7 @@ void StyleColorsClassic(ImPlotStyle* dst) {
     colors[ImPlotCol_Crosshairs]    = ImVec4(0.50f, 0.50f, 0.50f, 0.75f);
 }
 
-void StyleColorsDark(ImPlotStyle* dst) {
-    ImPlotStyle* style              = dst ? dst : &ImPlot::GetStyle();
-    ImVec4* colors                  = style->Colors;
-
-    style->MinorAlpha               = 0.25f;
-
+void StyleColorsDark(ImVec4* colors) {
     colors[ImPlotCol_Line]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_Fill]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_MarkerOutline] = IMPLOT_AUTO_COL;
@@ -5832,12 +5818,7 @@ void StyleColorsDark(ImPlotStyle* dst) {
     colors[ImPlotCol_Crosshairs]    = ImVec4(1.00f, 1.00f, 1.00f, 0.50f);
 }
 
-void StyleColorsLight(ImPlotStyle* dst) {
-    ImPlotStyle* style              = dst ? dst : &ImPlot::GetStyle();
-    ImVec4* colors                  = style->Colors;
-
-    style->MinorAlpha               = 1.0f;
-
+void StyleColorsLight(ImVec4* colors) {
     colors[ImPlotCol_Line]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_Fill]          = IMPLOT_AUTO_COL;
     colors[ImPlotCol_MarkerOutline] = IMPLOT_AUTO_COL;
@@ -5859,6 +5840,30 @@ void StyleColorsLight(ImPlotStyle* dst) {
     colors[ImPlotCol_AxisBgActive]  = IMPLOT_AUTO_COL; // TODO
     colors[ImPlotCol_Selection]     = ImVec4(0.82f, 0.64f, 0.03f, 1.00f);
     colors[ImPlotCol_Crosshairs]    = ImVec4(0.00f, 0.00f, 0.00f, 0.50f);
+}
+
+void StyleColorsAuto(ImPlotStyle* dst) {
+    ImPlotStyle* style = dst ? dst : &ImPlot::GetStyle();
+    style->MinorAlpha = 0.25f;
+    StyleColorsAuto(style->Colors);
+}
+
+void StyleColorsClassic(ImPlotStyle* dst) {
+    ImPlotStyle* style = dst ? dst : &ImPlot::GetStyle();
+    style->MinorAlpha = 0.5f;
+    StyleColorsClassic(style->Colors);
+}
+
+void StyleColorsDark(ImPlotStyle* dst) {
+    ImPlotStyle* style = dst ? dst : &ImPlot::GetStyle();
+    style->MinorAlpha = 0.25f;
+    StyleColorsDark(style->Colors);
+}
+
+void StyleColorsLight(ImPlotStyle* dst) {
+    ImPlotStyle* style = dst ? dst : &ImPlot::GetStyle();
+    style->MinorAlpha = 1.0f;
+    StyleColorsLight(style->Colors);
 }
 
 //-----------------------------------------------------------------------------

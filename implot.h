@@ -1091,6 +1091,11 @@ IMPLOT_API void StyleColorsDark(ImPlotStyle* dst = nullptr);
 // Style plot colors for ImGui "Light".
 IMPLOT_API void StyleColorsLight(ImPlotStyle* dst = nullptr);
 
+IMPLOT_API void StyleColorsAuto(ImVec4* dst = NULL);
+IMPLOT_API void StyleColorsClassic(ImVec4* dst = NULL);
+IMPLOT_API void StyleColorsDark(ImVec4* dst = NULL);
+IMPLOT_API void StyleColorsLight(ImVec4* dst = NULL);
+
 // Use PushStyleX to temporarily modify your ImPlotStyle. The modification
 // will last until the matching call to PopStyleX. You MUST call a pop for
 // every push, otherwise you will leak memory! This behaves just like ImGui.
